@@ -21,17 +21,15 @@ public class Program {
 		//lista-de-contribuintes
 		List<Contribuinte> list = new ArrayList<Contribuinte>();
 		for(int i=1; i<=n; i++) {
-			System.out.println("Contribuinte # " + i);
+			System.out.println("CONTRIBUINTE #" + i);
 			System.out.print("PF ou PJ (f/j) > ");
 			//charArt(0) pega primeira letra
 			char type = sc.next().charAt(0);
-			System.out.println();
 			System.out.print("Nome > ");
+			sc.nextLine(); //consumo-linha
 			String nome = sc.nextLine();
 			System.out.print("Renda Anual > ");
 			Double rendaAnual = sc.nextDouble();
-			
-			System.out.println();
 			if(type == 'f') {
 				System.out.print("GASTOS COM SAÚDE > ");
 				Double gastos = sc.nextDouble();
@@ -45,6 +43,8 @@ public class Program {
 				
 				list.add(new PessoaJuridica(nome, rendaAnual, numFuncionarios));
 			}//if-else	
+			
+			System.out.println();
 		}//for
 		
 		System.out.println();
@@ -53,7 +53,16 @@ public class Program {
 		//for-each pra printar a lista
 		for(Contribuinte c : list) {
 			System.out.println(c.getNome() + ": $ " + String.format("%.2f", c.impostoDeRenda()));
-		}//for-each
+		}
+		
+		System.out.println();
+		//for-each pra somar o imposto
+		double soma = 0.0;
+		for(Contribuinte c : list) {
+			soma += c.impostoDeRenda();
+		}
+		
+		System.out.println("IMPOSTO TOTAL = $" + String.format("%.2f", soma));
 
 		sc.close();
 	}//main
